@@ -1,0 +1,7 @@
+import { metricBand } from '../lib/audit-insights';
+
+const metrics = [['fcp','First contentful paint','FCP'],['lcp','Largest contentful paint','LCP'],['cls','Cumulative layout shift','CLS'],['tbt','Total blocking time','TBT'],['speedIndex','Speed index','SI']];
+export default function CoreMetrics({values}) {
+  const measurements = values || {};
+  return <section className="panel my-5" aria-labelledby="metrics-title"><div className="panel-heading"><h2 id="metrics-title" className="section-title">Page load metrics</h2><span className="text-[11px] text-muted">Lighthouse lab measurements</span></div><dl className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5">{metrics.map(([key,label,short]) => {const raw=measurements[key];const band=metricBand(key,raw);return <div key={key} className="min-w-0 border-b border-line px-4 py-4 last:border-b-0 sm:px-5 lg:border-r lg:border-b-0 lg:last:border-r-0"><dt title={label} className="text-xs text-muted">{label}<span className="sr-only"> ({short})</span></dt><dd className={`mt-2 text-lg font-semibold tracking-tight tabular-nums tone-${raw == null ? 'neutral' : band.tone}`}>{raw ?? '—'}</dd><p className={`mt-1 text-[11px] ${raw == null ? 'text-muted' : `tone-${band.tone}`}`}>{raw == null ? 'Not measured' : band.label}</p></div>;})}</dl><p className="border-t border-line px-5 py-3 text-[11px] leading-5 text-muted">These are Lighthouse lab results, not real-user field measurements. Status thresholds follow Lighthouse metric guidance.</p></section>;
+}

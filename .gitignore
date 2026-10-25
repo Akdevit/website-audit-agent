@@ -1,0 +1,24 @@
+# Dependencies
+node_modules/
+
+# Local environment files and credentials; keep the shareable template
+.env
+.env.*
+!.env.example
+
+# Generated builds, test output, and audit screenshots
+/dist/
+/frontend/dist/
+/frontend/coverage/
+/coverage/
+/reports/
+/playwright-report/
+/test-results/
+.cache/
+
+# Logs and local operating system files
+logs/
+*.log
+.DS_Store
+Thumbs.db
+Desktop.ini
